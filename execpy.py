@@ -1,14 +1,14 @@
-#!/usr/bin/env python 
+#!/usr/bin/python3 
 # -*- coding:utf-8 -*-
 import os
-import csv
-import json
+import jsonlines
 import pandas as pd
 
-filename = "C:\Users\Mikko\Desktop\101.json"
-with open(filename,'r') as f:
-  trump_list=json.load(f)
-frame=pd.DataFrame(trump_list)
-print(frame)
-frame.to_csv("C:\Users\Mikko\Desktop\meet.csv")
+filename="chat.json"
+with open(filename,'r',encoding='utf-8') as f:
+	for item in jsonlines.Reader(f):
+		
+		if 'text' in item.keys():
+			chat = open('chat.txt',mode = 'a',encoding='utf-8')
+			print(item['text'],file=chat)
 
